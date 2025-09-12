@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <title>外贸独立站 | 谷歌推广 | TikTok & WhatsApp - 任亮科技</title>
+  <meta name="description" content="任亮科技提供外贸独立站搭建、谷歌推广、TikTok、WhatsApp等社交媒体营销服务，帮助企业快速拓展全球客户。"/>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:"微软雅黑",sans-serif;line-height:1.6;background:#f4f6fa;color:#333;}
+
+    /* 平滑滚动 + 导航遮挡修复 */
+    html{
+      scroll-behavior: smooth;
+      scroll-padding-top: 70px; /* 导航高度 */
+    }
+
+    /* 顶部导航 */
+    .header{
+      width:100%;
+      height:70px;
+      background:#0a0f2c;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 20px;
+      position:fixed;
+      top:0;left:0;
+      z-index:1000;
+    }
+    .logo {flex-shrink: 0;}
+	.logo img{max-height:40px;/*height:auto;*/width:auto;}
+    .nav{display:flex;gap:20px; align-items: center;}
+    .nav a{text-decoration:none;color:#fff;font-size:16px;transition:.3s;}
+    .nav a:hover{color:#1abc9c;}
+
+    .menu-toggle{display:none;flex-direction:column;cursor:pointer;gap:5px;}
+    .menu-toggle span{display:block;width:25px;height:3px;background:#fff;}
+
+    @media (max-width:768px){
+      .nav{display:none;position:absolute;top:70px;right:0;background:#0a0f2c;flex-direction:column;width:200px;padding:10px;}
+      .nav.active{display:flex;}
+      .menu-toggle{display:flex;}
+    }
+
+    /* banner (首页) */
+    .banner{
+      height:calc(100vh - 70px);
+      background:linear-gradient(120deg,#0a0f2c,#1abc9c);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:32px;
+      font-weight:bold;
+      text-align:center;
+      padding:20px;
+      margin-top:70px; /* 防止导航遮挡 */
+    }
+	
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 梦幻渐变类 */
+.banner.animate-gradient {
+  background: linear-gradient(-45deg, #1a2a6c, #b21f1f, #fdbb2d, #2193b0);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+	
+	
+
+
+    /* section 标题 */
+    .section{
+      padding:60px 20px;
+      text-align:center;
+    }
+    .section h2{
+      font-size:26px;
+      margin-bottom:20px;
+      color:#0a0f2c;
+    }
+    .section p{max-width:800px;margin:0 auto 40px;}
+
+    /* 服务模块 */
+    .services{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+      max-width:1000px;
+      margin:0 auto;
+    }
+    .service-card{
+      background:#fff;
+      border-radius:12px;
+      padding:30px 20px;
+      box-shadow:0 4px 12px rgba(0,0,0,.1);
+      transition:.3s;
+    }
+    .service-card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 6px 16px rgba(0,0,0,.2);
+    }
+    .service-card h3{color:#1abc9c;margin-bottom:10px;}
+    .service-card p{font-size:15px;}
+
+    /* 底部 */
+    .footer{
+      background:#0a0f2c;
+      color:#fff;
+      text-align:center;
+      padding:20px;
+      margin-top:40px;
+    }
+/* 回到顶部按钮 */
+#backToTop {
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: #1abc9c;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: opacity 0.3s;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+#backToTop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+
+/* 语言切换 */
+.language-switch {
+  position: relative;
+  margin-left: auto;   /* 让语言切换推到右边 */
+  display: flex;
+  align-items: center;
+  margin-right: 20px;  /* PC端：语言按钮和导航之间距离 */
+}
+
+.lang-icon {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  filter: brightness(0) invert(1); /* 让图标保持白色风格 */
+  display: inline-block;
+  vertical-align: middle; /* 垂直居中 */
+}
+
+/* 下拉菜单 */
+.lang-menu {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: #fff;
+  color: #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  padding: 10px;
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  /*min-width: 120px;*/
+  min-width: 150px;   /* 固定宽度，避免左右滚动 */
+  max-width: 180px;   /* 最大宽度 */
+  z-index: 1001;
+  max-height: 350px;     /* 限制高度 */
+  overflow-y: auto;      /* 超出滚动 */
+  overflow-x: hidden; /* 禁止左右滚动 */
+}
+
+.lang-menu div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-menu img {
+  width: 20px;
+  height: auto;
+}
+
+.lang-menu a {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.lang-menu a:hover {
+  color: #1abc9c;
+}
+
+/* 移动端专属：语言切换靠近汉堡菜单 */
+@media (max-width:768px){
+  .language-switch {
+    /*margin-left: 0;*/
+    margin-right: 20px; /* 与汉堡菜单保持间距 */
+  }
+}
+
+
+  </style>
+  <script src="js/translate.js" type="text/javascript"></script>
+</head>
+<body>
+
+  <!-- 顶部 -->
+  <div class="header">
+    <div class="logo">
+      <img src="http://dns.renliang.com.cn:81/logo.png" alt="">
+    </div>
+	<!-- 语言切换 -->
+<div class="language-switch">
+  <img src="images/globe.png" alt="语言" class="lang-icon" onClick="toggleLangMenu()" />
+  <div class="lang-menu" id="langMenu">
+    <div>
+      <img src="images/cn.png" alt="Chinese" />
+      <a href="javascript:translate.changeLanguage('chinese_simplified');">中文版</a>
+    </div>
+	<div>
+      <img src="images/gb.png" alt="English" />
+      <a href="javascript:translate.changeLanguage('english');">英语</a>
+    </div>
+	<div>
+      <img src="images/vn.png" alt="Vietnamese" />
+      <a href="javascript:translate.changeLanguage('vietnamese');">越南语</a>
+    </div>
+	<div>
+      <img src="images/id.png" alt="Indonesian" />
+      <a href="javascript:translate.changeLanguage('indonesian');">印度尼西亚语</a>
+    </div>
+	<div>
+      <img src="images/es.png" alt="Spanish" />
+      <a href="javascript:translate.changeLanguage('spanish');">西班牙语</a>
+    </div>
+	<div>
+      <img src="images/ru.png" alt="Russian" />
+      <a href="javascript:translate.changeLanguage('russian');">俄语</a>
+    </div>
+	<div>
+      <img src="images/pt.png" alt="Portuguese" />
+      <a href="javascript:translate.changeLanguage('portuguese');">葡萄牙语</a>
+    </div>
+	<div>
+      <img src="images/jp.png" alt="Japanese" />
+      <a href="javascript:translate.changeLanguage('japanese');">日语</a>
+    </div>
+	<div>
+      <img src="images/fr.png" alt="French" />
+      <a href="javascript:translate.changeLanguage('french');">法语</a>
+    </div>
+	<div>
+      <img src="images/kr.png" alt="Korean" />
+      <a href="javascript:translate.changeLanguage('korean');">韩语</a>
+    </div>
+	<div>
+      <img src="images/sa.png" alt="Arabic" />
+      <a href="javascript:translate.changeLanguage('arabic');">阿拉伯语</a>
+    </div>
+	
+	
+    
+  </div>
+</div>
+
+
+    <div class="menu-toggle" onClick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="nav" id="nav">
+      <a href="#home">首页</a>
+      <a href="#about">关于我们</a>
+      <a href="#services">服务项目</a>
+      <a href="#contact">联系我们</a>
+    </div>
+  </div>
+
+  <!-- 首页 banner -->
+  <div class="banner" id="home">科技创新 · 连接全球 · 助力外贸腾飞</div>
+
+  <!-- 关于我们 -->
+  <div class="section" id="about">
+    <h2>关于我们</h2>
+    <p>我们是一家专注于数字化营销与科技创新的公司，提供从外贸独立站搭建、社交媒体推广到视频剪辑、店铺装修的一站式解决方案。帮助客户通过TikTok、YouTube、Facebook、WhatsApp等平台，实现品牌全球化。</p>
+  </div>
+
+  <!-- 服务项目 -->
+  <div class="section" id="services">
+    <h2>我们的服务</h2>
+    <div class="services">
+      <div class="service-card">
+        <h3>网站制作开发</h3>
+        <p>定制化外贸独立站设计与开发，支持多语言、多终端访问，提升品牌形象与转化率。</p>
+      </div>
+      <div class="service-card">
+        <h3>Google广告</h3>
+        <p>专业的Google推广与SEO优化，让您的产品和品牌在搜索引擎中脱颖而出。</p>
+      </div>
+	  <div class="service-card">
+        <h3>个媒社交</h3>
+        <p>整合TikTok、YouTube、Facebook、WhatsApp等海外社交媒体，实现高效引流与客户转化。</p>
+      </div>
+      <div class="service-card">
+        <h3>视频剪辑</h3>
+        <p>创意短视频与宣传片制作，匹配TikTok、YouTube等平台趋势，提升内容营销效果。</p>
+      </div>
+      <div class="service-card">
+        <h3>店铺装修</h3>
+        <p>为跨境电商店铺设计专业装修方案，打造更具吸引力的购物体验。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 联系我们 -->
+  <div class="section" id="contact">
+    <h2>联系我们</h2>
+    <p> +86 15003379595(微信同号)<br>
+        邮箱：info@renliang.com.cn<br>
+        地址：中国 · 创业 · 科技园</p>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer">© 2025 RENLIANG 版权所有</div>
+  <button id="backToTop">↑</button>
+
+<script>
+  function toggleMenu(){
+    document.getElementById("nav").classList.toggle("active");
+  }
+
+  // 点击导航链接后关闭菜单
+  document.querySelectorAll("#nav a").forEach(link => {
+    link.addEventListener("click", () => {
+      document.getElementById("nav").classList.remove("active");
+    });
+  });
+  
+	// 回到顶部按钮逻辑
+	const backToTop = document.getElementById("backToTop");
+	
+	window.addEventListener("scroll", () => {
+	  if (window.scrollY > 200) {
+		backToTop.classList.add("show");
+	  } else {
+		backToTop.classList.remove("show");
+	  }
+	});
+	
+	backToTop.addEventListener("click", () => {
+	  window.scrollTo({ top: 0, behavior: "smooth" });
+	});
+	
+	
+	// 3秒后给 banner 添加动画类
+setTimeout(() => {
+  document.querySelector('.banner').classList.add('animate-gradient');
+}, 3000);
+
+
+
+// 语言切换
+function toggleLangMenu(){
+  const menu = document.getElementById("langMenu");
+  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+
+// 点击页面其他地方关闭语言菜单
+document.addEventListener("click", (e) => {
+  const langSwitch = document.querySelector(".language-switch");
+  if (!langSwitch.contains(e.target)) {
+    document.getElementById("langMenu").style.display = "none";
+  }
+});
+
+// 点击语言 a 链接时自动关闭菜单
+document.querySelectorAll(".lang-menu a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.getElementById("langMenu").style.display = "none";
+  });
+});
+
+
+
+
+
+// 点击语言时调用
+function changeLanguage(lang) {
+  // 保存到 localStorage
+  localStorage.setItem("site_language", lang);
+
+  // 调用 translate.js 的切换方法
+  translate.changeLanguage(lang);
+}
+
+// 页面加载时恢复用户上次选择的语言
+window.addEventListener("DOMContentLoaded", () => {
+  const savedLang = localStorage.getItem("site_language");
+  if (savedLang) {
+    translate.changeLanguage(savedLang);
+  }
+});
+</script>
+
+<script src="js/fanyi.js" type="text/javascript"></script>
+</body>
+</html>
